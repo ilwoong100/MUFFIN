@@ -1,0 +1,77 @@
+## model config
+#embedding_size: 32
+# dataset config
+
+# general
+gpu_id: 0
+use_gpu: True
+seed: 2020
+state: INFO
+reproducibility: True
+log_root: "log/"
+data_path: 'dataset/'
+checkpoint_dir: 'saved'
+show_progress: True
+
+# MovieLens, Amazon
+field_separator: "\t" #指定数据集field的分隔符
+seq_separator: " " #指定数据集中token_seq或者float_seq域里的分隔符
+USER_ID_FIELD: user_id #指定用户id域
+ITEM_ID_FIELD: item_id #指定物品id域
+RATING_FIELD: rating #指定打分rating域
+TIME_FIELD: timestamp #指定时间域
+#指定从什么文件里读什么列，这里就是从ml-1m.inter里面读取user_id, item_id, rating, timestamp这四列,剩下的以此类推
+load_col:
+    inter: [user_id, item_id, timestamp]
+
+NEG_PREFIX: neg_ #指定负采样前缀
+LABEL_FIELD: label #指定标签域
+ITEM_LIST_LENGTH_FIELD: item_length #指定序列长度域
+LIST_SUFFIX: _list #指定序列前缀
+MAX_ITEM_LIST_LENGTH: 50 #指定最大序列长度
+POSITION_FIELD: position_id #指定生成的序列位置id
+
+# max_user_inter_num: np.inf
+min_user_inter_num: 5
+# max_item_inter_num: np.inf
+min_item_inter_num: 5
+
+
+# training settings
+epochs: 500 #训练的最大轮数
+train_batch_size: 256 #训练的batch_size
+learner: adam #使用的pytorch内置优化器
+learning_rate: 0.001 #学习率
+training_neg_sample_num: 0 #负采样数目
+eval_step: 1 #每次训练后做evalaution的次数
+stopping_step: 15 #控制训练收敛的步骤数，在该步骤数内若选取的评测标准没有什么变化，就可以提前停止了
+hidden_dropout_prob: 0.5
+attn_dropout_prob: 0.5
+
+# evalution settings
+eval_setting: TO_LS,full #对数据按时间排序，设置留一法划分数据集，并使用全排序
+leave_one_num: 2
+group_by_user: True
+real_time_process: False
+metrics: ["Recall", "NDCG"] #评测标准
+valid_metric: NDCG@20 #选取哪个评测标准作为作为提前停止训练的标准
+eval_batch_size: 8192 #评测的batch_size
+weight_decay: 0
+topk: [5, 10, 20]
+valid_metric_bigger: True
+loss_decimal_place: 4
+metric_decimal_place: 4
+
+# directory setting
+
+lmd: 0.1
+lmd_sem: 0.1
+tau: 1
+
+# choose from {un, su, us, us_x}
+wo_aug: False
+contrast: 'None'
+SSL_AUG: 'None'
+
+# choose from {dot, cos}
+sim: 'dot'
