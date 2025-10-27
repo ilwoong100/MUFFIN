@@ -1,7 +1,7 @@
 # MUFFIN
 Mixture of User-Adaptive Frequency Filtering for Sequential Recommendation, CIKM 2025
 
-This is the official code for MUFFIN in the paper "[Mixture of User-Adaptive Frequency Filtering for Sequential Recommendation](LINK)", [The 34th ACM International Conference on Information and Knowledge Management](https://cikm2025.org/).
+This is the official code for MUFFIN in the paper "[Mixture of User-Adaptive Frequency Filtering for Sequential Recommendation](https://www.arxiv.org/abs/2508.13670)", [The 34th ACM International Conference on Information and Knowledge Management](https://cikm2025.org/).
 
 
 
